@@ -1,0 +1,948 @@
+<title>مكتبة الاختصارات البصرية</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Aref+Ruqaa:wght@400;700&family=Amiri:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap">
+
+<style>
+/* ==========================================================================
+   مكتبة الاختصارات البصرية — Khaldoun A. Akramah design system (jableh-style)
+   Tokens recovered from: _ds/…/colors_and_type.css + preview/colors-*.html
+   ========================================================================== */
+:root{
+  /* jableh-style 12 */
+  --jb-blue:#0B3D5C; --jb-deep:#062538; --citrus:#E07B2E; --terracotta:#B84A2C;
+  --olive:#6B7A3A;  --gold:#C9A557;    --navy:#0F2A44;   --sand:#F4EFE6;
+  --warm-sand:#EFE5D2; --paper:#FAF7F2; --ink:#1A1A1A;   --muted:#8B7E6A;
+  /* national override */
+  --syria-green:#114845; --syria-sage:#A1B8A6; --syria-amber:#E8A04E;
+
+  /* semantic — light (paper) */
+  --bg:var(--paper);
+  --bg-2:var(--warm-sand);
+  --surface:#F7F2E9;
+  --text:var(--ink);
+  --text-2:var(--muted);
+  --line:rgba(26,26,26,.12);
+  --line-strong:rgba(26,26,26,.24);
+  --chrome:var(--navy);
+  --chrome-text:var(--sand);
+  --out-bg:var(--navy);
+  --out-text:var(--sand);
+  --shadow-panel:none;
+
+  /* الخطوط — عائلة IBM Plex الموحّدة (عربي/لاتيني/مونو) مع نسخيّ Amiri ورقعة Aref Ruqaa للحظة الواحدة */
+  --f-cover:'Aref Ruqaa','Amiri','Times New Roman',serif;
+  --f-display:'Amiri','Times New Roman',serif;
+  --f-body:'IBM Plex Sans Arabic','IBM Plex Sans','Helvetica Neue',sans-serif;
+  --f-italic:'Cormorant Garamond',Georgia,serif;
+  --f-meta:'IBM Plex Sans','IBM Plex Sans Arabic','Helvetica Neue',sans-serif;
+  /* العربي داخل النصوص التقنية يسقط على Plex Arabic لا على خط النظام — تبقى العائلة واحدة */
+  --f-mono:'IBM Plex Mono','IBM Plex Sans Arabic',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px; --s6:32px; --s7:48px; --s8:64px;
+  --r:2px;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:var(--jb-deep);
+    --bg-2:var(--navy);
+    --surface:#0B3049;
+    --text:var(--sand);
+    --text-2:rgba(244,239,230,.62);
+    --line:rgba(244,239,230,.16);
+    --line-strong:rgba(244,239,230,.34);
+    --chrome:#041B29;
+    --chrome-text:var(--sand);
+    --out-bg:#04141F;
+    --out-text:var(--sand);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:var(--jb-deep); --bg-2:var(--navy); --surface:#0B3049;
+  --text:var(--sand); --text-2:rgba(244,239,230,.62);
+  --line:rgba(244,239,230,.16); --line-strong:rgba(244,239,230,.34);
+  --chrome:#041B29; --chrome-text:var(--sand);
+  --out-bg:#04141F; --out-text:var(--sand);
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  direction:rtl; text-align:right;
+  background:var(--bg); color:var(--text);
+  font-family:var(--f-body); font-size:16px; line-height:1.65;
+  letter-spacing:0; -webkit-font-smoothing:antialiased;
+  min-height:100vh; position:relative; padding-bottom:var(--s8);
+}
+/* documentary grain — mandatory */
+body::after{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:90;
+  opacity:.14; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.4 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) body::after{mix-blend-mode:screen;opacity:.07;}}
+:root[data-theme="dark"] body::after{mix-blend-mode:screen;opacity:.07;}
+
+:focus-visible{outline:2px solid var(--citrus); outline-offset:2px;}
+button{font-family:inherit;color:inherit;background:none;border:none;cursor:pointer;}
+input,select,textarea{font-family:inherit;font-size:inherit;color:inherit;}
+::placeholder{color:var(--text-2);opacity:.8;}
+
+.wrap{max-width:1320px;margin:0 auto;padding:0 var(--s5);}
+
+/* ── chrome ─────────────────────────────────────────────── */
+.masthead{background:var(--chrome);color:var(--chrome-text);padding:var(--s7) 0 var(--s6);position:relative;overflow:hidden;}
+.masthead::before{
+  content:""; position:absolute; inset:0;
+  background:linear-gradient(200deg,rgba(224,123,46,.16),rgba(184,74,44,.06) 46%,transparent 70%);
+  pointer-events:none;
+}
+.masthead .wrap{position:relative;display:flex;justify-content:space-between;align-items:flex-end;gap:var(--s5);flex-wrap:wrap;}
+.eyebrow{font-family:var(--f-italic);font-style:italic;font-size:16px;letter-spacing:2.5px;color:var(--gold);direction:ltr;text-align:right;display:block;}
+/* رقعة Aref Ruqaa — للحظة الواحدة فقط: ترويسة الصفحة. تحتاج سطراً مرتاحاً كي لا تُقصّ صعوداتها */
+h1{font-family:var(--f-cover);font-weight:700;font-size:clamp(40px,5.6vw,72px);line-height:1.45;letter-spacing:0;margin-top:2px;padding-bottom:4px;text-wrap:balance;}
+.lede{font-size:15px;line-height:1.7;color:rgba(244,239,230,.72);max-width:56ch;margin-top:var(--s3);}
+.counter{border:1px solid rgba(244,239,230,.22);border-radius:var(--r);padding:var(--s3) var(--s4);min-width:150px;text-align:center;}
+.counter b{display:block;font-family:var(--f-italic);font-style:italic;font-weight:300;font-size:46px;line-height:.95;color:var(--citrus);font-variant-numeric:tabular-nums;}
+.counter span{font-family:var(--f-meta);font-size:9px;letter-spacing:3px;text-transform:uppercase;color:rgba(244,239,230,.6);}
+
+nav.sections{background:var(--chrome);border-top:1px solid rgba(244,239,230,.14);position:sticky;top:0;z-index:60;}
+nav.sections .wrap{display:flex;gap:2px;overflow-x:auto;}
+nav.sections button{
+  font-family:var(--f-meta);font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(244,239,230,.6);padding:14px 16px;white-space:nowrap;position:relative;
+  transition:color .2s ease;
+}
+nav.sections button:hover{color:var(--sand);}
+nav.sections button[aria-current="true"]{color:var(--sand);}
+nav.sections button[aria-current="true"]::after{content:"";position:absolute;inset-inline:8px;bottom:0;height:2px;background:var(--citrus);}
+nav.sections .nav-ar{font-family:var(--f-body);font-size:12px;letter-spacing:0;font-weight:500;}
+.qcount{display:inline-block;margin-inline-start:6px;font-family:var(--f-mono);font-size:10px;color:var(--citrus);}
+
+/* ── generic section ────────────────────────────────────── */
+.view{display:none;padding-top:var(--s6);}
+.view.on{display:block;}
+.sec-head{border-bottom:1px solid var(--line);padding-bottom:var(--s3);margin-bottom:var(--s5);}
+.sec-head h2{font-family:var(--f-display);font-weight:700;font-size:clamp(24px,3vw,34px);line-height:1.2;color:var(--text);}
+.sec-head p{color:var(--text-2);font-size:14px;max-width:70ch;margin-top:var(--s2);}
+.meta-label{font-family:var(--f-meta);font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--text-2);display:block;margin-bottom:var(--s2);}
+
+/* ── toolbar ────────────────────────────────────────────── */
+.libs{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);margin-bottom:var(--s4);}
+.lib{
+  text-align:right;border:1px solid var(--line);border-radius:var(--r);
+  background:var(--bg-2);padding:var(--s4);transition:border-color .2s ease;
+}
+.lib:hover{border-color:var(--line-strong);}
+.lib[aria-pressed="true"]{border-color:var(--citrus);border-inline-end:3px solid var(--citrus);}
+.lib b{display:block;font-family:var(--f-display);font-size:19px;font-weight:700;}
+.lib span{font-family:var(--f-meta);font-size:11px;color:var(--text-2);letter-spacing:.04em;}
+
+.tools{display:flex;gap:var(--s3);flex-wrap:wrap;align-items:center;margin-bottom:var(--s4);}
+.search{flex:1 1 260px;position:relative;}
+.search input{
+  width:100%;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);
+  padding:12px var(--s4);outline:none;transition:border-color .2s ease;
+}
+.search input:focus{border-color:var(--citrus);}
+.toggle{
+  border:1px solid var(--line);border-radius:999px;padding:9px 16px;
+  font-size:13px;color:var(--text-2);transition:border-color .2s ease,color .2s ease;white-space:nowrap;
+}
+.toggle:hover{border-color:var(--line-strong);}
+.toggle[aria-pressed="true"]{border-color:var(--gold);color:var(--gold);}
+
+.cats{display:flex;gap:2px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin-bottom:var(--s5);}
+.cats button{
+  font-family:var(--f-body);font-size:14px;color:var(--text-2);padding:10px 14px;position:relative;
+  transition:color .2s ease;
+}
+.cats button:hover{color:var(--text);}
+.cats button[aria-current="true"]{color:var(--text);}
+.cats button[aria-current="true"]::after{content:"";position:absolute;inset-inline:6px;bottom:-1px;height:2px;background:var(--citrus);}
+.cats .n{font-family:var(--f-mono);font-size:11px;color:var(--citrus);margin-inline-start:6px;font-variant-numeric:tabular-nums;}
+
+/* ── workspace ──────────────────────────────────────────── */
+.workspace{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:var(--s5);align-items:start;}
+@media(max-width:1080px){.workspace{grid-template-columns:1fr;}}
+
+.cat-note{color:var(--text-2);font-size:13.5px;line-height:1.75;max-width:68ch;margin-bottom:var(--s4);}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(232px,1fr));gap:var(--s3);}
+.card{
+  text-align:right;background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:var(--s4);position:relative;transition:border-color .2s ease;
+}
+.card:hover{border-color:var(--line-strong);}
+.card[aria-pressed="true"]{border-color:var(--citrus);border-inline-end:3px solid var(--citrus);}
+.card .code{
+  display:block;font-family:var(--f-mono);font-size:12.5px;font-weight:500;
+  color:var(--terracotta);direction:ltr;text-align:right;margin-bottom:var(--s2);word-break:break-all;
+}
+.card.gpt .code{color:var(--olive);}
+.card .t{font-family:var(--f-display);font-weight:700;font-size:17px;line-height:1.3;margin-bottom:var(--s1);}
+.card .d{font-size:12.5px;line-height:1.65;color:var(--text-2);}
+.card .star{position:absolute;top:12px;inset-inline-start:12px;color:var(--gold);font-size:11px;}
+.empty{color:var(--text-2);font-size:14px;padding:var(--s5) 0;}
+
+/* ── composer ───────────────────────────────────────────── */
+.composer{
+  position:sticky;top:64px;background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--r);padding:var(--s5);
+}
+@media(max-width:1080px){.composer{position:static;}}
+.composer h3{font-family:var(--f-display);font-size:22px;font-weight:700;line-height:1.25;}
+.composer .picked{font-family:var(--f-mono);font-size:12.5px;color:var(--terracotta);direction:ltr;text-align:right;display:block;margin-bottom:var(--s1);}
+.composer.gpt .picked{color:var(--olive);}
+.composer .hint{font-size:12.5px;color:var(--text-2);line-height:1.6;margin-top:var(--s2);}
+.rule{height:1px;background:var(--line);border:0;margin:var(--s4) 0;}
+.field{margin-bottom:var(--s3);}
+.field label{font-family:var(--f-meta);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-2);display:block;margin-bottom:6px;}
+textarea,select{
+  width:100%;background:var(--bg);border:1px solid var(--line);border-radius:var(--r);
+  padding:9px 11px;outline:none;transition:border-color .2s ease;line-height:1.6;
+}
+textarea{min-height:62px;resize:vertical;}
+select{height:38px;cursor:pointer;}
+textarea:focus,select:focus{border-color:var(--citrus);}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:var(--s3);}
+
+.layer{display:flex;align-items:flex-start;gap:8px;font-size:13px;color:var(--text);margin-bottom:8px;line-height:1.5;}
+.layer input{accent-color:var(--terracotta);margin-top:4px;flex-shrink:0;}
+.layer small{display:block;color:var(--text-2);font-size:11.5px;}
+
+.out-label{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px;}
+.out{
+  background:var(--out-bg);color:var(--out-text);border-radius:var(--r);padding:var(--s4);
+  font-family:var(--f-mono);font-size:12.5px;line-height:1.9;direction:ltr;text-align:left;
+  white-space:pre-wrap;word-break:break-word;unicode-bidi:plaintext;min-height:60px;
+  max-height:280px;overflow-y:auto;
+}
+.acts{display:flex;gap:var(--s2);margin-top:var(--s3);}
+.btn{
+  flex:1;border-radius:var(--r);padding:11px var(--s4);font-weight:700;font-size:14px;
+  transition:background-color .2s ease,border-color .2s ease,opacity .2s ease;text-align:center;
+}
+.btn-1{background:var(--terracotta);color:var(--paper);}
+.btn-1:hover{background:#9C3E24;}
+.btn-1.done{background:var(--olive);}
+.btn-2{border:1px solid var(--line-strong);color:var(--text);}
+.btn-2:hover{border-color:var(--citrus);color:var(--citrus);}
+.btn:active{opacity:.85;}
+
+/* ── layers / templates ─────────────────────────────────── */
+.stack{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:var(--s4);}
+.panel{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:var(--s5);}
+.panel h3{font-family:var(--f-display);font-size:21px;font-weight:700;margin-bottom:var(--s1);}
+.panel .sub{font-family:var(--f-italic);font-style:italic;font-size:15px;color:var(--muted);margin-bottom:var(--s3);direction:ltr;text-align:right;}
+.panel p{font-size:13.5px;color:var(--text-2);line-height:1.7;}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:var(--s3);}
+.chip{
+  font-family:var(--f-mono);font-size:11.5px;direction:ltr;
+  border:1px solid var(--line);border-radius:999px;padding:5px 11px;color:var(--text);
+  transition:border-color .2s ease,color .2s ease;
+}
+.chip:hover{border-color:var(--citrus);color:var(--citrus);}
+
+.tpl{background:var(--bg-2);border:1px solid var(--line);border-radius:var(--r);padding:var(--s4);text-align:right;width:100%;transition:border-color .2s ease;}
+.tpl:hover{border-color:var(--citrus);}
+.tpl b{font-family:var(--f-display);font-size:18px;font-weight:700;display:block;margin-bottom:6px;}
+.tpl code{display:block;font-family:var(--f-mono);font-size:11.5px;direction:ltr;text-align:left;color:var(--text-2);background:var(--bg);padding:9px 11px;border-radius:var(--r);line-height:1.7;word-break:break-word;}
+
+/* ── queue ──────────────────────────────────────────────── */
+.qrow{display:flex;gap:var(--s3);align-items:flex-start;border:1px solid var(--line);border-radius:var(--r);background:var(--bg-2);padding:var(--s3) var(--s4);margin-bottom:var(--s2);}
+.qrow .i{font-family:var(--f-italic);font-style:italic;font-size:20px;color:var(--citrus);min-width:28px;font-variant-numeric:tabular-nums;}
+.qrow pre{flex:1;font-family:var(--f-mono);font-size:12px;line-height:1.8;direction:ltr;text-align:left;white-space:pre-wrap;word-break:break-word;overflow-x:auto;}
+.qrow .x{color:var(--text-2);font-size:16px;line-height:1;padding:4px 6px;border-radius:var(--r);}
+.qrow .x:hover{color:var(--terracotta);}
+
+/* ── identity ───────────────────────────────────────────── */
+.swatches{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:var(--s2);margin-top:var(--s3);}
+.sw{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;text-align:right;transition:border-color .2s ease;}
+.sw:hover{border-color:var(--line-strong);}
+.sw .chipc{height:56px;display:block;}
+.sw .m{padding:7px 9px;background:var(--bg);}
+.sw .n{font-family:var(--f-meta);font-size:9px;letter-spacing:2px;text-transform:uppercase;display:block;}
+.sw .h{font-family:var(--f-mono);font-size:10.5px;color:var(--text-2);direction:ltr;display:block;}
+.forbidden .chipc{position:relative;}
+.forbidden .chipc::after{content:"";position:absolute;inset:0;background:linear-gradient(to top left,transparent 47.5%,var(--terracotta) 47.5%,var(--terracotta) 52.5%,transparent 52.5%);}
+.numbered{list-style:none;counter-reset:k;}
+.numbered li{counter-increment:k;position:relative;padding-inline-start:34px;margin-bottom:var(--s3);font-size:14px;line-height:1.7;}
+.numbered li::before{
+  content:counter(k);position:absolute;inset-inline-start:0;top:0;
+  font-family:var(--f-italic);font-style:italic;font-size:19px;color:var(--citrus);
+}
+.numbered li b{font-weight:700;}
+.plain{list-style:none;}
+.plain li{padding-inline-start:16px;position:relative;font-size:13.5px;line-height:1.7;color:var(--text-2);margin-bottom:6px;}
+.plain li::before{content:"·";position:absolute;inset-inline-start:0;color:var(--citrus);font-weight:700;}
+.redline{border:1px solid var(--terracotta);border-inline-end:3px solid var(--terracotta);background:var(--bg-2);border-radius:var(--r);padding:var(--s5);}
+.redline code{display:block;font-family:var(--f-body);font-size:15px;color:var(--terracotta);background:var(--bg);padding:var(--s3) var(--s4);border-radius:var(--r);margin-top:var(--s3);}
+.gap{border:1px dashed var(--line-strong);border-radius:var(--r);padding:var(--s4);margin-top:var(--s5);}
+.gap p{font-size:13px;color:var(--text-2);line-height:1.75;}
+.gap b{color:var(--text);}
+
+/* ── signature (jableh-style exception: bottom-right) ───── */
+.colophon{border-top:1px solid var(--line);margin-top:var(--s8);padding-top:var(--s4);display:flex;justify-content:space-between;align-items:baseline;gap:var(--s4);flex-wrap:wrap;}
+.colophon p{font-family:var(--f-meta);font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-2);}
+.sig{font-family:var(--f-italic);font-style:italic;font-size:11px;color:var(--gold);opacity:.27;direction:ltr;}
+
+.toast{
+  position:fixed;bottom:20px;inset-inline-start:20px;z-index:120;
+  background:var(--navy);color:var(--sand);border-radius:var(--r);padding:11px 18px;font-size:13px;
+  opacity:0;transform:translateY(6px);transition:opacity .2s ease,transform .2s ease;pointer-events:none;
+}
+.toast.on{opacity:1;transform:none;}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important;}}
+</style>
+
+<header class="masthead">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">Visual Shorthand Index — Khaldoun A. Akramah</span>
+      <h1>مكتبة الاختصارات البصرية</h1>
+      <p class="lede">مكتبتان، ٦٣ اختصاراً. اختر اختصاراً، اكتب الموضوع، اضبط النسبة والنبرة، وألبِسه طبقة الهوية — ثم انسخ الأمر أو اجمعه في قائمة تشغيل.</p>
+    </div>
+    <div class="counter"><b id="libCount">0</b><span id="libCountLabel">shortcuts</span></div>
+  </div>
+</header>
+
+<nav class="sections" aria-label="أقسام البرنامج">
+  <div class="wrap" id="navBar"></div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ══ المكتبة ══ -->
+  <section class="view on" id="v-library" aria-labelledby="h-library">
+    <div class="sec-head">
+      <h2 id="h-library">المكتبة</h2>
+      <p>المكتبة المخصصة مبنية على أسلوبك البصري: واقعية عالية، حسّ وثائقي أو تحريري، لغة عربية واضحة، وابتعاد عن الشكل المولّد التقليدي. مكتبة GPT العامة نظام عمل شخصي للاستخدام اليومي — ليست أوامر رسمية من OpenAI.</p>
+    </div>
+
+    <div class="libs" id="libSwitch"></div>
+
+    <div class="tools">
+      <div class="search">
+        <input id="q" type="search" placeholder="ابحث في المكتبة كلها… جبلة، طبي، ذاكرة، إنفوجرافيك  ( / )" aria-label="بحث في الاختصارات">
+      </div>
+      <button class="toggle" id="starOnly" aria-pressed="false">★ النواة اليومية فقط</button>
+    </div>
+
+    <div class="cats" id="cats" role="tablist" aria-label="فئات المكتبة"></div>
+
+    <div class="workspace">
+      <div>
+        <p class="cat-note" id="catNote"></p>
+        <div class="grid" id="grid"></div>
+      </div>
+
+      <aside class="composer" id="composer" aria-label="مركّب الأمر">
+        <span class="meta-label">مركّب الأمر</span>
+        <span class="picked" id="cCode">/—</span>
+        <h3 id="cTitle">اختر اختصاراً</h3>
+        <p class="hint" id="cDesc">اضغط أي بطاقة على اليمين ليُحمَّل الاختصار هنا مع مثاله الجاهز.</p>
+
+        <hr class="rule">
+
+        <div class="field">
+          <label for="fTopic">الموضوع</label>
+          <textarea id="fTopic" placeholder="اكتب الموضوع بالعربية"></textarea>
+        </div>
+
+        <div class="duo">
+          <div class="field"><label for="fStyle">style</label><select id="fStyle"></select></div>
+          <div class="field"><label for="fRatio">ratio</label><select id="fRatio"></select></div>
+          <div class="field"><label for="fLang">language</label><select id="fLang"></select></div>
+          <div class="field"><label for="fTone">tone</label><select id="fTone"></select></div>
+        </div>
+        <div class="field" id="textField"><label for="fText">text</label><select id="fText"></select></div>
+
+        <hr class="rule">
+
+        <span class="meta-label">طبقة الهوية — Khaldoun A. Akramah</span>
+        <div class="field">
+          <label for="fType">TYPE — وزن المحتوى</label>
+          <select id="fType">
+            <option value="">بدون طبقة هوية</option>
+            <option value="t1">TYPE 1 — ثقيل / أرشيفي (ذاكرة، سجن، غياب، نزوح)</option>
+            <option value="t2">TYPE 2 — رسمي / محاسبة (ملفات، تحقيق، عدالة)</option>
+            <option value="t3">TYPE 3 — خفيف / فرح (حرية، تحرير، فجر، نصر)</option>
+            <option value="t4">TYPE 4 — شعري / تأملي (سماء، فصول، جذور، السؤال)</option>
+            <option value="nat">NATIONAL OVERRIDE — سوريا بعد التحرير</option>
+          </select>
+        </div>
+        <label class="layer"><input type="checkbox" id="oSig" checked><span>التوقيع المدمج<small>أسفل يسار · 25–30% شفافية · مدمج في نسيج السطح</small></span></label>
+        <label class="layer"><input type="checkbox" id="oForbid"><span>الألوان الممنوعة<small>بنفسجي · ماجنتا · وردي حارّ · سماوي · ليموني · أبيض ناصع كخلفية</small></span></label>
+        <label class="layer"><input type="checkbox" id="oFlag"><span>علم الثورة السورية<small>يوصف حرفياً — «علم سوريا» المجرّد يُنتج علم النظام</small></span></label>
+
+        <hr class="rule">
+
+        <div class="out-label">
+          <span class="meta-label" style="margin:0">الأمر الجاهز</span>
+          <span class="meta-label" style="margin:0" id="outLen"></span>
+        </div>
+        <div class="out" id="out" aria-live="polite">/—</div>
+        <div class="acts">
+          <button class="btn btn-1" id="copy">نسخ الأمر</button>
+          <button class="btn btn-2" id="enqueue">أضف للقائمة</button>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ══ الطبقات ══ -->
+  <section class="view" id="v-layers" aria-labelledby="h-layers">
+    <div class="sec-head">
+      <h2 id="h-layers">طبقات التشغيل</h2>
+      <p>ترتيب عملي للاستخدام: ثلاث طبقات لمكتبة GPT العامة، ونواة يومية من اثني عشر اختصاراً في المكتبة المخصصة. اضغط أي اختصار ليُفتح في المركّب.</p>
+    </div>
+    <div class="stack" id="layers"></div>
+
+    <div class="sec-head" style="margin-top:var(--s7)">
+      <h2>الطبقة الافتراضية</h2>
+      <p>ما تفترضه المكتبة المخصصة تلقائياً إذا لم تضف شيئاً بعد الاختصار.</p>
+    </div>
+    <div class="panel">
+      <ul class="plain" id="defaults"></ul>
+    </div>
+  </section>
+
+  <!-- ══ القوالب ══ -->
+  <section class="view" id="v-templates" aria-labelledby="h-templates">
+    <div class="sec-head">
+      <h2 id="h-templates">القوالب الجاهزة</h2>
+      <p>القالب الثابت: <code style="font-family:var(--f-mono);font-size:12.5px;direction:ltr;display:inline-block">/الاختصار الموضوع، style: …, ratio: …, language: Arabic, tone: …</code> — اضغط أي قالب ليُحمَّل في المركّب بضبطه كاملاً.</p>
+    </div>
+    <div class="stack" id="templates"></div>
+  </section>
+
+  <!-- ══ الهوية ══ -->
+  <section class="view" id="v-identity" aria-labelledby="h-identity">
+    <div class="sec-head">
+      <h2 id="h-identity">دليل الهوية</h2>
+      <p>مأخوذ حرفياً من Khaldoun Akramah Design System — النظام يحمل ثلاث لوحات في آنٍ واحد وتنتقل بينها حسب المحتوى. اضغط أي لون لنسخ قيمته.</p>
+    </div>
+
+    <div class="stack" id="palettes"></div>
+
+    <div class="sec-head" style="margin-top:var(--s7)"><h2>ميثاق الكاميرا — سبع قواعد</h2><p>هذا النظام انضباط تصوير وثائقي أولاً. اكسر واحدة فتُقرأ الصورة كصورة ذكاء اصطناعي.</p></div>
+    <div class="panel"><ol class="numbered" id="camera"></ol></div>
+
+    <div class="stack" style="margin-top:var(--s5)">
+      <div class="panel">
+        <h3>الإضاءة مزدوجة المصدر — إلزامية</h3>
+        <p>لكل صورة: مصدر بارد محيط + مصدر دافئ عملي. ممنوع: إضاءة مسطّحة، إضاءة متناظرة، أو «إضاءة جميلة» بلا مصدر مسمّى.</p>
+        <ul class="plain" id="lighting"></ul>
+      </div>
+      <div class="panel">
+        <h3>التوقيع</h3>
+        <p>على المنشور النصي: <span style="color:var(--text)">— Khaldoun A. Akramah</span>. على كل صورة مولّدة: مدمج في البكسل لا كطبقة فوقية.</p>
+        <ul class="plain" id="sigrules"></ul>
+      </div>
+      <div class="panel">
+        <h3>خمس بنى للنبرة — اختر واحدة، لا تمزج</h3>
+        <p>المنشور المقسوم بين نبرتين يفقد قوته.</p>
+        <ul class="plain" id="tones"></ul>
+      </div>
+    </div>
+
+    <div class="sec-head" style="margin-top:var(--s7)"><h2>الخط الأحمر المطلق</h2></div>
+    <div class="redline">
+      <p style="font-size:14.5px;line-height:1.75">إذا طُلب منك أي حدث أو تاريخ أو رقم أو نسبة وكانت ثقتك دون 100%، فالمخرج حرفياً:</p>
+      <code>[نقص في البيانات الموثقة — يرجى تزويدي بالمصدر]</code>
+      <p style="margin-top:var(--s3);font-size:13.5px">لا اختلاق. لا تقريب. لا تقدير. هذه القاعدة تعلو على كل ما عداها.</p>
+    </div>
+
+    <div class="gap">
+      <p><b>نقص في مواد الهوية المرفقة:</b> ملف <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">colors_and_type.css</span> الجذري ومجلد <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">fonts/</span> غير موجودين داخل الأرشيف المرفق، رغم أن <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">ui_kits/jableh-style/components.css</span> و<span style="font-family:var(--f-mono);direction:ltr;display:inline-block">preview/_base.css</span> يستوردانه ويعتمدان على متغيّرات <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">--jb-*</span>. قيم لوحة jableh المعروضة هنا مستخرجة من بطاقات <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">preview/colors-*.html</span> ومن النسخة المتوسطية <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">_ds/…/colors_and_type.css</span> داخل الأرشيف نفسه، لا من مصدر خارجي.</p>
+      <p style="margin-top:var(--s3)"><b>التوقيع — محسوم:</b> الصيغة المعتمدة هي <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">𝓚𝓱𝓪𝓵𝓭𝓸𝓾𝓷𝓐𝓴𝓻𝓪𝓶𝓪𝓱</span> — بلا <span style="font-family:var(--f-mono);direction:ltr;display:inline-block">@</span>، وألف واحدة. أكّدها خلدون، وهي نفسها صيغة الـ README في الأرشيف. أي صيغة أخرى — بـ<span style="font-family:var(--f-mono);direction:ltr;display:inline-block">@</span> أو بألفين — مرفوضة.</p>
+    </div>
+  </section>
+
+  <!-- ══ القائمة ══ -->
+  <section class="view" id="v-queue" aria-labelledby="h-queue">
+    <div class="sec-head">
+      <h2 id="h-queue">قائمة التشغيل</h2>
+      <p>الأوامر التي جمّعتها، بالترتيب. تُحفظ في متصفحك حتى بعد إغلاق الصفحة.</p>
+    </div>
+    <div class="acts" style="max-width:520px;margin-bottom:var(--s5)">
+      <button class="btn btn-1" id="copyAll">نسخ القائمة كلها</button>
+      <button class="btn btn-2" id="dlAll">تنزيل ملف نصي</button>
+      <button class="btn btn-2" id="clearAll">تفريغ</button>
+    </div>
+    <div id="queue"></div>
+  </section>
+
+  <div class="colophon">
+    <p>Khaldoun Akramah Design System · jableh-style HTML track</p>
+    <span class="sig">𝓚𝓱𝓪𝓵𝓭𝓸𝓾𝓷𝓐𝓴𝓻𝓪𝓶𝓪𝓱</span>
+  </div>
+</main>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ═══════════ البيانات — منقولة من المكتبتين المرفقتين ═══════════ */
+
+const LIB_KAA = {
+  id:'kaa', title:'المكتبة المخصصة', sub:'أسلوبي البصري — 38 اختصاراً',
+  fields:{
+    style:['photorealistic','editorial','conceptual','infographic','handwritten','archival'],
+    ratio:['9:16','4:5','1:1','16:9'],
+    language:['Arabic','English','bilingual'],
+    tone:['documentary','cinematic','minimal','emotional','educational','urgent','premium'],
+    text:['none','minimal','headline only','short Arabic copy']
+  },
+  cats:[
+    {id:'syria', label:'التوثيق السوري', note:'ذاكرة سورية، قضايا إنسانية، توثيق بصري، أحداث تاريخية ومعاصرة.', items:[
+      {code:'syriadocimage', t:'صورة وثائقية سورية', d:'مشاهد إنسانية، ذاكرة الحرب، نزوح، إنقاذ، حياة يومية تحت الأزمة.', ex:'منقذ سوري يحمل طفلاً داخل نقطة إسعاف ميدانية'},
+      {code:'syriadocposter', t:'بوستر توثيقي سوري', d:'ذكرى المجازر، حملات الذاكرة والعدالة، مناسبات الثورة، توثيق سياسي وإنساني.', ex:'ذكرى الهجوم الكيميائي على الغوطة الشرقية 21-08-2013', star:true},
+      {code:'syriamemoryposter', t:'بوستر ذاكرة', d:'الغياب، الأثر، الفقد، الشهادة — مفقودون، شهداء، سجون، مدن تغيّرت.', ex:'الذاكرة الجماعية لضحايا صيدنايا', star:true},
+      {code:'syriaeditorial', t:'صورة تحريرية مفهومية', d:'مقالات الرأي، نقد الإنكار أو التزييف، الرسائل الفكرية.', ex:'إنكار الجريمة كجريمة ثانية'},
+      {code:'syriaarchiveframe', t:'إطار أرشيفي', d:'منشورات تذكارية، أرشفة حدث، «في مثل هذا اليوم»، استحضار تاريخي.', ex:'في مثل هذا اليوم: الغوطة 2013'},
+      {code:'syriahumanstory', t:'قصة إنسانية', d:'قصة واحدة داخل السياق السوري — أم ثكلى، مسعف، طفل ناجٍ، عائلة نازحة.', ex:'أم سورية تنتظر خبراً عن ابنها المفقود'},
+      {code:'syriarevolutionposter', t:'بوستر الثورة', d:'روح الثورة السورية، الكرامة، الذاكرة، الرفض الرمزي للطغيان.', ex:'الحرية أثقل من الخوف'}
+    ]},
+    {id:'awareness', label:'البوسترات التوعوية', note:'رسائل واضحة: صدمة، تحذير، مسؤولية، تغيير سلوك.', items:[
+      {code:'awarenessposter', t:'بوستر توعوي عام', d:'صحة، بيئة، سلامة، سلوك اجتماعي.', ex:'لا ترمِ النفايات على الشاطئ', star:true},
+      {code:'shockposter', t:'بوستر صادم محسوب', d:'حوادث، مخدرات، تدخين، عنف، قيادة متهورة — يعتمد الأثر النفسي.', ex:'القيادة المتهورة لا زر فيها لإعادة الحياة'},
+      {code:'conceptwarningposter', t:'بوستر تحذيري مفهومي', d:'استعارة بصرية قوية، رسائل تحتاج metaphor، تحذير غير مباشر.', ex:'الهاتف أثناء القيادة يسرق الانتباه والحياة', star:true},
+      {code:'publicsafetyposter', t:'بوستر سلامة عامة', d:'حزام الأمان، السرعة، الكهرباء، الحريق، الإسعافات الأولية.', ex:'افصل الكهرباء قبل الصيانة'},
+      {code:'healthawarenessposter', t:'بوستر توعية صحية', d:'سكري، ضغط دم، لقاحات، سرطان الثدي، صحة نفسية.', ex:'الكشف المبكر ينقذ الحياة'},
+      {code:'environmentposter', t:'بوستر بيئي', d:'نظافة، شاطئ، بحر، تلوث، تشجير.', ex:'بحرها أمانة'},
+      {code:'socialresponsibilityposter', t:'بوستر مسؤولية مجتمعية', d:'احترام المكان العام، النظافة، الصوت العالي، الوعي المدني.', ex:'جبلة لك، نظّفها متل بيتك'}
+    ]},
+    {id:'medical', label:'المحتوى الطبي', note:'محتوى طبي وتثقيف صحي بعرض بصري واضح وسهل الفهم.', items:[
+      {code:'medicallearning', t:'شرح تعليمي طبي', d:'أمراض، أعراض، علاج، وقاية، فروق طبية أساسية.', ex:'ما هي الكتف المتجمدة؟'},
+      {code:'medicalinfographic', t:'إنفوجرافيك طبي', d:'قائمة أعراض، خطوات علاج، تعليمات منزلية، نصائح للمريض.', ex:'علاج الكتف المتجمدة', star:true},
+      {code:'medicalsteps', t:'شرح طبي بالخطوات', d:'ماذا أفعل إذا…، تعليمات بعد التشخيص، تمارين منزلية، روتين علاج.', ex:'خطوات التعامل مع ألم الكتف وتيبسه'},
+      {code:'anatomyvisual', t:'عرض تشريحي بصري', d:'مفاصل، عضلات، أعصاب، مكان الإصابة، تفسير الألم.', ex:'تشريح مفصل الكتف والأوتار المحيطة به', star:true},
+      {code:'symptomchart', t:'لوحة أعراض', d:'أعراض مرض، متى نراجع الطبيب، التفريق بين الطبيعي والخطير.', ex:'أعراض التهاب المسالك البولية'},
+      {code:'treatmentflow', t:'مسار علاجي بصري', d:'تشخيص ثم علاج، مراحل التعافي، متى يبدأ العلاج الطبيعي.', ex:'رحلة علاج الكتف المتجمدة'},
+      {code:'beforeaftermedical', t:'مقارنة طبية بصرية', d:'فرق بين حالتين، دواء مقابل دواء، أعراض متشابهة.', ex:'الفرق بين تمزق الأوتار والكتف المتجمدة'},
+      {code:'patientinstructionscard', t:'بطاقة تعليمات مريض', d:'ما يجب فعله وتجنبه، تذكير علاجي، إرشادات يومية.', ex:'تعليمات منزلية لمريض الكتف المتجمدة'}
+    ]},
+    {id:'jableh', label:'جبلة واللاذقية', note:'المحتوى المحلي: المدينة، الذاكرة، الجمال، الهوية، الحملات المدنية، المشاهد الساحلية.', items:[
+      {code:'jablehposter', t:'بوستر جبلة', d:'المدينة، الذاكرة، المكان، الجمال المحلي، الانتماء.', ex:'صدى جبلة', star:true},
+      {code:'jablehdoc', t:'صورة واقعية من جبلة', d:'المرفأ، السوق، الأزقة، البحر، الناس، المشهد اليومي.', ex:'صياد في ميناء جبلة وقت الفجر'},
+      {code:'jablehmemory', t:'بوستر ذاكرة محلية', d:'شخصيات جبلاوية راحلة، مشاهد من الماضي، مهن قديمة، حنين مكاني.', ex:'خبّاز جبلة الذي لا تنساه المدينة'},
+      {code:'jablehcivic', t:'بوستر مدني لجبلة', d:'النظافة، البحر، الأملاك العامة، الشارع، السلوك المجتمعي.', ex:'جبلة لك، نظّفها متل بيتك', star:true},
+      {code:'latakiaposter', t:'بوستر اللاذقية', d:'المدينة، الهوية، المعالم، الطابع المديني، حملات الانتماء.', ex:'اللاذقية ليست الساحل', star:true},
+      {code:'latakiadoc', t:'صورة توثيقية للاذقية', d:'المدينة من الأعلى، الواجهة البحرية، التفاصيل العمرانية.', ex:'مشهد جوي للاذقية عند الغروب'},
+      {code:'coastidentityposter', t:'بوستر الهوية الساحلية', d:'الذاكرة البحرية، البيئة، المرفأ، العلاقة بين البحر والمدينة.', ex:'البحر ذاكرة وهوية لا مجرد منظر'},
+      {code:'localbrandposter', t:'بوستر نشاط محلي', d:'محال، خدمات، مكاتب، مشاريع صغيرة، هوية محلية.', ex:'محل قهوة في جبلة بطابع أصيل'}
+    ]},
+    {id:'quick', label:'منشورات عربية سريعة', note:'صور سريعة وواضحة لمنشورات يومية أو شبه يومية.', items:[
+      {code:'arabicquickpost', t:'منشور سريع', d:'فكرة يومية، خبر خفيف، رأي مختصر، محتوى سريع النشر.', ex:'القهوة في جبلة ليست مشروباً فقط بل عادة يومية', star:true},
+      {code:'arabicquotepost', t:'بوست اقتباس', d:'جملة مؤثرة، حكمة، قول قصير، عبارة افتتاحية.', ex:'لا تجعل المذهب فوق الإسلام', star:true},
+      {code:'arabiccarouselcover', t:'غلاف كاروسيل', d:'منشورات تعليمية، تقسيم محتوى على عدة شرائح.', ex:'5 أسباب تجعل ألم الكتف يستمر'},
+      {code:'arabicfactpost', t:'منشور حقيقة سريعة', d:'معلومة مؤكدة، تصحيح شائعة، نقطة علمية أو اجتماعية.', ex:'الكتف المتجمدة لا تعني دائماً وجود تمزق في الأوتار'},
+      {code:'arabiclistpost', t:'منشور نقاط قصيرة', d:'3 نصائح، 5 أخطاء، 4 فوائد، قائمة سريعة.', ex:'5 نصائح لتقليل ألم الكتف في المنزل'},
+      {code:'arabicheadlinevisual', t:'صورة عنوان قوي', d:'عناوين صحفية، رسائل فكرية، طرح سؤال مركزي.', ex:'لماذا تتحول الخلافات الفقهية إلى خصومة؟'},
+      {code:'arabicmicroeducation', t:'تصميم تعليمي مصغر', d:'تعريف مصطلح، نقطة طبية، قاعدة سلوكية، تفكيك فكرة.', ex:'ما معنى الكتف المتجمدة؟'},
+      {code:'arabicstoryvisual', t:'تصميم للستوري', d:'تنبيه، اقتباس، معلومة واحدة، سؤال تفاعلي.', ex:'هل تجاهل ألم الكتف يطيل مدة العلاج؟', star:true}
+    ]}
+  ]
+};
+
+const LIB_GPT = {
+  id:'gpt', title:'مكتبة GPT العامة', sub:'اختصارات توليد الصور — 25 اختصاراً',
+  fields:{
+    style:['documentary','cinematic','handwritten'],
+    ratio:['9:16','4:5','16:9'],
+    language:['Arabic'],
+    tone:['dramatic','educational','minimal']
+  },
+  cats:[
+    {id:'display', label:'أنماط عرض المحتوى', note:'تحويل المحتوى إلى شكل عرض بصري محدد: خط يد، ملاحظات، شرح تعليمي، إنفوجرافيك، خريطة ذهنية، خط زمني.', items:[
+      {code:'generatehandwrittenimage', t:'صورة بخط اليد', d:'يحوّل المحتوى إلى صورة مكتوبة بخط اليد على ورقة أو دفتر حقيقي — عناوين قصيرة، وصفات، شروحات، ملاحظات.', ex:'طريقة عمل الملوخية', star:true},
+      {code:'generatesticky-notes', t:'Sticky Notes', d:'يعرض المحتوى كقصاصات ملاحظات منظمة بصرياً — خطوات، أفكار، تلخيصات، تقسيم موضوع لنقاط.', ex:'خطوات علاج الكتف المتجمدة', star:true},
+      {code:'visualizelearning', t:'شرح بصري تعليمي', d:'يحوّل الموضوع إلى شرح تعليمي — مفاهيم، مقارنات، تسلسل، شرح مدرسي أو توعوي.', ex:'كيف يعمل جهاز التنفس', star:true},
+      {code:'generateinfographic', t:'إنفوجرافيك', d:'إنفوجرافيك منظم وواضح — أرقام، مقارنات، حقائق، إحصاءات، محتوى تثقيفي.', ex:'أعراض السكري وأنواعه', star:true},
+      {code:'generatemindmap', t:'خريطة ذهنية', d:'يعرض الموضوع كخريطة ذهنية — تفريع أفكار، مراجعة، دراسة، تنظيم محاور.', ex:'أسباب الكتف المتجمدة'},
+      {code:'generatetimeline', t:'خط زمني', d:'يعرض الأحداث أو المراحل على خط زمني — تاريخ، تطور قضية، مراحل مشروع.', ex:'أحداث الهجوم الكيميائي على الغوطة', star:true}
+    ]},
+    {id:'posters', label:'البوسترات والمحتوى البصري', note:'بوسترات بأنماط مختلفة — عام، سينمائي، وثائقي، تحريري، مفهومي، سوشال ميديا.', items:[
+      {code:'generateposter', t:'بوستر عام', d:'بوستر عام حسب الموضوع — حملات، توعية، مناسبات، قضايا عامة.', ex:'النظافة مسؤولية الجميع', star:true},
+      {code:'generatecinematicposter', t:'بوستر سينمائي درامي', d:'موضوعات ثقيلة، ذاكرة، حرب، قضايا إنسانية، حملات صادمة.', ex:'مجزرة الكيماوي في الغوطة', star:true},
+      {code:'generatedocumentaryimage', t:'صورة وثائقية', d:'صورة وثائقية واقعية الطابع — أحداث تاريخية، توثيق إنساني، مشاهد صحفية.', ex:'نقطة طبية ميدانية في الغوطة الشرقية', star:true},
+      {code:'generateeditorialvisual', t:'صورة تحريرية', d:'صورة تحريرية أو conceptual editorial — مقالات، رسائل فكرية، قضايا الرأي.', ex:'الانقسام المذهبي وأثره على وحدة المسلمين'},
+      {code:'generateconceptposter', t:'بوستر مفهومي', d:'يحوّل الفكرة إلى استعارة بصرية قوية — رسائل رمزية، حملات فكرية.', ex:'القيادة المتهورة لعبة بلا إعادة', star:true},
+      {code:'generatesocialpost', t:'منشور سوشال ميديا', d:'صورة مناسبة لمنشور — فيسبوك، إنستغرام، إعلانات خفيفة، محتوى يومي.', ex:'القهوة في مدينة جبلة السورية', star:true}
+    ]},
+    {id:'education', label:'التعليم والتوضيح البصري', note:'مقارنات، خطوات، تشريح، ومخططات عملية.', items:[
+      {code:'generatecomparisonchart', t:'مقارنة بصرية', d:'مقارنة واضحة بين عنصرين أو أكثر — قبل/بعد، فرق بين مصطلحين، مقارنة أمراض.', ex:'الفرق بين التهاب الأوتار والكتف المتجمدة'},
+      {code:'generatestepbystep', t:'شرح خطوة بخطوة', d:'خطوات متسلسلة — إرشادات، وصفات، تعليمات، How-to.', ex:'طريقة فورمات الكمبيوتر وتثبيت ويندوز'},
+      {code:'generateanatomyvisual', t:'شرح تشريحي', d:'شرح بصري تشريحي أو طبي — طب، عضلات، مفاصل، آلية الإصابة.', ex:'تشريح مفصل الكتف وتيبسه'},
+      {code:'generateprocessdiagram', t:'مخطط عملية', d:'مخطط عملية أو تدفق — كيف يعمل شيء، workflow، سلسلة خطوات.', ex:'رحلة المريض من التشخيص إلى العلاج'}
+    ]},
+    {id:'identity', label:'الهوية والأسلوب البصري', note:'ضبط الأسلوب البصري نفسه بدل نوع المحتوى.', items:[
+      {code:'adaptstyle', t:'تكييف الأسلوب', d:'يحافظ على الموضوع لكن يغيّر الأسلوب البصري — style reference، توحيد طابع عدة صور.', ex:'صورتي بأسلوب إعلان فاخر', star:true},
+      {code:'photorealistic', t:'واقعي فوتوغرافي', d:'صورة فوتوغرافية واقعية جداً — إعلانات، مشاهد توثيقية، شخصيات.', ex:'صياد في ميناء جبلة عند الغروب', star:true},
+      {code:'minimaldesign', t:'تصميم بسيط', d:'تصميم بسيط ونظيف — اقتباسات، بطاقات، بوسترات هادئة.', ex:'اقتباس عن الصبر'},
+      {code:'luxurycampaign', t:'حملة فاخرة', d:'صورة بطابع إعلاني فاخر — براندات، موضة، منتجات، حملات راقية.', ex:'عطر شرقي فاخر بإضاءة ذهبية'}
+    ]},
+    {id:'useful', label:'صيغ مفيدة في العمل', note:'اقتباسات، أغلفة، مصغّرات، بوسترات جهات وتوعية.', items:[
+      {code:'generatearabicquote', t:'اقتباس عربي', d:'تصميم لعبارة عربية أو اقتباس — أقوال، عبارات مؤثرة، اقتباسات فكرية.', ex:'لا تجعل المذهب فوق الإسلام'},
+      {code:'generatecover', t:'غلاف بصري', d:'غلاف مقال، ملف، تقرير، أو سلسلة محتوى.', ex:'ملف عن جبلة القديمة'},
+      {code:'generatethumbnail', t:'صورة مصغرة', d:'صورة مصغرة ملفتة — يوتيوب، ريلز، فيديوهات شرح أو رأي.', ex:'لماذا لا يختفي ألم الكتف؟'},
+      {code:'generatebrandposter', t:'بوستر دعائي', d:'بوستر دعائي لجهة أو خدمة أو نشاط — مكتب، شركة، متجر.', ex:'مكتب خدمات طلابية في طرطوس'},
+      {code:'generateawarenessposter', t:'بوستر توعوي مركّز', d:'بوستر توعوي مركز على الرسالة — سلامة، صحة، بيئة، مجتمع.', ex:'حافظ على نظافة البحر'}
+    ]}
+  ]
+};
+
+const LIBS = [LIB_KAA, LIB_GPT];
+
+/* طبقات التشغيل */
+const LAYERS = [
+  {h:'طبقة ١ — التعليم', s:'GPT · Teaching', p:'المفاهيم والشرح والتنظيم البصري للمعلومة.', lib:'gpt', codes:['visualizelearning','generateinfographic','generatestepbystep','generatemindmap']},
+  {h:'طبقة ٢ — السوشال والمحتوى', s:'GPT · Daily', p:'المنشور اليومي، البوستر العام، الاقتباس، المصغّرة.', lib:'gpt', codes:['generatesocialpost','generateposter','generatearabicquote','generatethumbnail']},
+  {h:'طبقة ٣ — المشاريع القوية', s:'GPT · Heavy', p:'العمل الثقيل: السينمائي، الوثائقي، المفهومي، وتكييف الأسلوب.', lib:'gpt', codes:['generatecinematicposter','generatedocumentaryimage','generateconceptposter','adaptstyle']},
+  {h:'النواة اليومية', s:'المكتبة المخصصة · 12', p:'مجموعة التشغيل اليومية إذا أردت نواة قوية دون كثرة.', lib:'kaa', codes:['syriadocposter','syriamemoryposter','awarenessposter','conceptwarningposter','medicalinfographic','anatomyvisual','jablehposter','jablehcivic','latakiaposter','arabicquickpost','arabicquotepost','arabicstoryvisual']}
+];
+
+const DEFAULTS = [
+  'لغة الصورة: عربية عند الحاجة',
+  'الطابع البصري: واقعي، تحريري، غير كرتوني',
+  'الجودة: عالية جداً',
+  'الأولوية: الفكرة أولاً، ثم الإخراج',
+  'النص داخل الصورة: قليل، واضح، مقصود',
+  'الوجوه والتفاصيل: طبيعية، غير بلاستيكية',
+  'الإضاءة: منطقية ومبنية على المشهد',
+  'التكوين: قوي، منظم، غير مزدحم',
+  'النتيجة: تبدو مصممة ومصورة بعناية، لا «مولّدة» بشكل نمطي'
+];
+
+const TEMPLATES = [
+  {h:'توثيق سوري', lib:'kaa', code:'syriadocposter', topic:'الموضوع', set:{ratio:'4:5',language:'Arabic',tone:'documentary',text:'minimal'}},
+  {h:'توعية', lib:'kaa', code:'conceptwarningposter', topic:'الموضوع', set:{ratio:'4:5',language:'Arabic',tone:'urgent',text:'headline only'}},
+  {h:'طبي', lib:'kaa', code:'medicalinfographic', topic:'الموضوع', set:{ratio:'4:5',language:'Arabic',tone:'educational',text:'short Arabic copy'}},
+  {h:'جبلة', lib:'kaa', code:'jablehposter', topic:'الموضوع', set:{ratio:'4:5',language:'Arabic',tone:'emotional',text:'minimal'}},
+  {h:'منشور سريع', lib:'kaa', code:'arabicquickpost', topic:'الموضوع', set:{ratio:'1:1',language:'Arabic',text:'short Arabic copy'}},
+  {h:'بوستر توعوي — GPT', lib:'gpt', code:'generateawarenessposter', topic:'الموضوع', set:{style:'cinematic',ratio:'4:5',language:'Arabic'}}
+];
+
+/* الهوية */
+const PALETTES = [
+  {h:'اللوحة الوطنية السورية', s:'National override — يعلو على الـ TYPE', p:'لأي محتوى عن سوريا بعد التحرير، مهما كان وزن الموضوع.', c:[['Forest Green','#114845'],['Sage','#A1B8A6'],['White','#FFFFFF'],['Deep Calm','#3E4C5A'],['Amber Thread','#E8A04E']]},
+  {h:'TYPE 1 — ثقيل / أرشيفي', s:'Memory · prison · absence', p:'جاف، متآكل، صامت. أعلى درجات خفض التشبّع.', c:[['Cold Concrete','#9A9387'],['Oxidized Rust','#7A4B33'],['Deep Grey','#3B3A36'],['Bone White','#E8E2D4'],['Charcoal Shadow','#1C1B19']]},
+  {h:'TYPE 2 — رسمي / محاسبة', s:'Files · investigation · justice', p:'رسمي، صارم، تباين أعلى قليلاً.', c:[['Steel Blue','#4A5A66'],['Cool Grey','#6E7378'],['Manila Cream','#D9CBB0'],['Ink Black','#161A1D'],['Metallic','#8C9196']]},
+  {h:'TYPE 3 — خفيف / فرح', s:'Freedom · liberation · dawn', p:'دافئ لكن مؤسَّس — فرح مكتسَب، لا حلوى.', c:[['Warm Gold','#C9A45C'],['Soft Amber','#E0B878'],['Earth Green','#6F7A52'],['Dawn Light','#F0DEC0'],['Warm Brown','#5C4633']]},
+  {h:'TYPE 4 — شعري / تأملي', s:'Sky · seasons · roots', p:'متّسع، ضبابي، أعلى شفافية.', c:[['Cool Blue','#7E94A6'],['Dawn Rose','#C9A89C'],['Pale Gold','#D8C9A3'],['Atmospheric Haze','#B7C2C9'],['Deep Calm','#3E4C5A']]},
+  {h:'لوحة jableh-style', s:'HTML/CSS direct output', p:'اللوحة التي بُني بها هذا البرنامج نفسه — لا تُستخدم كتوجيه لنموذج الصور.', c:[['Med Blue','#0B3D5C'],['Deep Sea','#062538'],['Citrus','#E07B2E'],['Terracotta','#B84A2C'],['Olive','#6B7A3A'],['Gold','#C9A557'],['Navy','#0F2A44'],['Sand','#F4EFE6'],['Warm Sand','#EFE5D2'],['Paper','#FAF7F2'],['Ink','#1A1A1A'],['Muted','#8B7E6A']]},
+  {h:'ممنوعة في كل مكان', s:'Forbidden — regime / AI-gloss / cheap template', p:'تُقرأ كجمالية نظام أو لمعان ذكاء اصطناعي أو قالب رخيص.', forbidden:true, c:[['Purple','#7A3DD1'],['Violet','#B026FF'],['Deep Pink','#FF1493'],['Hot Pink','#FF69B4'],['Magenta','#FF00FF'],['Cyan','#00FFFF'],['Lime','#BFFF00'],['Pure White bg','#FFFFFF']]}
+];
+
+const CAMERA = [
+  ['الكاميرا أولاً، الفكرة ثانياً','ابدأ بـ «أين أقف؟» لا بـ «صورة لـ…».'],
+  ['اللحظة، لا الذروة','قبل أو بعد، لا أثناء.'],
+  ['الجزء، لا الكل','اليد، القماش، الحذاء — لا اللقطة البطولية.'],
+  ['المادة، لا الانطباع','الطبقة الرابعة إلزامية: نسيج + لمعان + خريطة لونية + مادة مسمّاة. لا «ثقل التاريخ» بل «٢ ملم من الغبار».'],
+  ['عيب واحد محسوب','تنفّس بؤرة، زيغ لوني، غبار عدسة، أو تظليل حواف — واحد فقط، مختار.'],
+  ['الفراغ السلبي عنصر','تفصيل هامشي صامت — موضوع، لا مشروح.'],
+  ['شاهد، لا راوٍ','الكاميرا تشهد. لا تقل أبداً «الصورة تُظهر…».']
+];
+
+const LIGHTING = [
+  'بارد محيط: ما قبل الفجر 4500K · غائم 5500K · ضوء قمر 6500K · نافذة شتوية 5800K',
+  'دافئ عملي: مصباح كهرماني 2200K · ضوء نار 1900K · حافة غروب 2800K · شمعة 1850K',
+  'المنظور: قرار جريء واحد لكل صورة — لا مستوى نظر متمركز افتراضياً',
+  'الوجه: رفضه كلياً (الافتراضي)، أو شخصية واحدة مسمّاة بتاريخ موثّق، أو خارج البؤرة'
+];
+
+const SIGRULES = [
+  'الموضع: أسفل اليسار — لا اليمين',
+  'الحجم: 25–30% من الاسمي — صغير جداً',
+  'الشفافية: 25–30% (نطاق صارم)',
+  'الدمج: داخل نسيج السطح — غبار، ظل، قماش، حجر — بلون متكيّف',
+  'ممنوع: أي رقم ظاهر، أي نص مضاف، إطارات أو زخارف، أي موضع آخر، توهّج أو ظل مسقط، أي تهجئة مختلفة',
+  'استثناء jableh-style في HTML: التوقيع أسفل اليمين — Cormorant italic 11px شفافية 0.27 ذهبي'
+];
+
+const TONES = [
+  'ساخرة هجومية — لبقايا النظام والمطبّعين: مفارقة ← كشف التناقض ← جملة قاطعة (2–4/5)',
+  'رثائية حزينة — للشهداء والمعتقلين والذاكرة: صورة حسّية قصيرة ← شعور صريح ← دعاء (2–3)',
+  'أخلاقية تحفيزية — لإعادة بناء سوريا: قيمة واضحة ← فعل قابل للتنفيذ ← وعد بتحسّن مرئي (2–3)',
+  'تحليلية فلسفية — لأسئلة الهوية والمفارقة التاريخية: سؤال عميق ← ربط بحدث حقيقي ← خاتمة مفتوحة (2–4)',
+  'نقدية داخلية — مخاطبة المجتمع السوري نفسه: ولاء مبدئي ← تسمية القصور صراحةً ← مطلب قابل للقياس (3–4)'
+];
+
+const TYPE_LAYER = {
+  t1:{label:'TYPE 1 — Heavy / Archival', hex:'#9A9387, #7A4B33, #3B3A36, #E8E2D4, #1C1B19', feel:'dry, eroded, silent — highest desaturation'},
+  t2:{label:'TYPE 2 — Formal / Accountability', hex:'#4A5A66, #6E7378, #D9CBB0, #161A1D, #8C9196', feel:'official, severe, slightly higher contrast'},
+  t3:{label:'TYPE 3 — Light / Joy', hex:'#C9A45C, #E0B878, #6F7A52, #F0DEC0, #5C4633', feel:'warm but grounded — earned, not candy'},
+  t4:{label:'TYPE 4 — Poetic / Contemplative', hex:'#7E94A6, #C9A89C, #D8C9A3, #B7C2C9, #3E4C5A', feel:'expansive, hazy, highest transparency'},
+  nat:{label:'NATIONAL OVERRIDE — post-liberation Syria', hex:'#114845, #A1B8A6, #FFFFFF, #3E4C5A, #E8A04E (horizon only)', feel:'overrides TYPE regardless of content weight'}
+};
+const L_SIG = 'signature: 𝓚𝓱𝓪𝓵𝓭𝓸𝓾𝓷𝓐𝓴𝓻𝓪𝓶𝓪𝓱 — bottom-left, 25–30% opacity, embedded in the surface texture, adaptive color';
+const L_FORBID = 'avoid: purple, violet, magenta, hot pink, fuchsia, cyan, lime, pure-white background';
+const L_FLAG = 'flag: Syrian revolutionary flag — green, white, and black with three red stars';
+const L_DISC = 'discipline: documentary, real, cinematic — never plastic, never AI-gloss. Dual-source lighting: one cold ambient + one warm practical.';
+
+/* ═══════════ الحالة ═══════════ */
+const S = {lib:'kaa', cat:LIB_KAA.cats[0].id, q:'', starOnly:false, picked:null, queue:[]};
+const $ = id => document.getElementById(id);
+const lib = () => LIBS.find(l => l.id === S.lib);
+const total = l => l.cats.reduce((n,c) => n + c.items.length, 0);
+const esc = s => String(s).replace(/[&<>"]/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[m]));
+const findItem = (libId, code) => {
+  const L = LIBS.find(l => l.id === libId); let hit = null;
+  L.cats.forEach(c => c.items.forEach(i => { if (i.code === code) hit = {item:i, cat:c, L}; }));
+  return hit;
+};
+
+/* ═══════════ التنقّل ═══════════ */
+const VIEWS = [
+  {id:'library', ar:'المكتبة'}, {id:'layers', ar:'الطبقات'},
+  {id:'templates', ar:'القوالب'}, {id:'identity', ar:'الهوية'}, {id:'queue', ar:'القائمة'}
+];
+function renderNav(){
+  $('navBar').innerHTML = VIEWS.map(v =>
+    `<button data-view="${v.id}" aria-current="${document.getElementById('v'+'-'+v.id).classList.contains('on')}">
+       <span class="nav-ar">${v.ar}</span>${v.id==='queue'?`<span class="qcount" id="qc">${S.queue.length?'('+S.queue.length+')':''}</span>`:''}
+     </button>`).join('');
+  $('navBar').querySelectorAll('button').forEach(b => b.onclick = () => go(b.dataset.view));
+}
+function go(id){
+  VIEWS.forEach(v => $('v-' + v.id).classList.toggle('on', v.id === id));
+  renderNav();
+  window.scrollTo({top:0, behavior:'smooth'});
+}
+
+/* ═══════════ المكتبة ═══════════ */
+function renderLibs(){
+  $('libSwitch').innerHTML = LIBS.map(l =>
+    `<button class="lib" data-lib="${l.id}" aria-pressed="${l.id===S.lib}">
+       <b>${l.title}</b><span>${esc(l.sub)}</span>
+     </button>`).join('');
+  $('libSwitch').querySelectorAll('.lib').forEach(b => b.onclick = () => {
+    if (b.dataset.lib === S.lib) return;
+    S.lib = b.dataset.lib; S.cat = lib().cats[0].id; S.q = ''; $('q').value = '';
+    renderLibs(); renderCats(); renderFields();
+    /* الاختصار المختار يخصّ المكتبة الأخرى — حمّل أول اختصار في المكتبة الجديدة */
+    pick(S.lib, lib().cats[0].items[0].code);
+  });
+  $('libCount').textContent = total(lib());
+  $('libCountLabel').textContent = lib().id === 'kaa' ? 'custom shortcuts' : 'gpt shortcuts';
+}
+function renderCats(){
+  $('cats').innerHTML = lib().cats.map(c =>
+    `<button role="tab" data-cat="${c.id}" aria-current="${c.id===S.cat}">${c.label}<span class="n">${c.items.length}</span></button>`).join('');
+  $('cats').querySelectorAll('button').forEach(b => b.onclick = () => {
+    S.cat = b.dataset.cat; S.q = ''; $('q').value = ''; renderCats(); renderGrid();
+  });
+}
+function visibleItems(){
+  const L = lib(); let items;
+  if (S.q){
+    items = [];
+    L.cats.forEach(c => c.items.forEach(i => {
+      if ((i.code + ' ' + i.t + ' ' + i.d + ' ' + i.ex).toLowerCase().includes(S.q.toLowerCase())) items.push(i);
+    }));
+  } else {
+    items = L.cats.find(c => c.id === S.cat).items;
+  }
+  return S.starOnly ? items.filter(i => i.star) : items;
+}
+function renderGrid(){
+  const L = lib(), items = visibleItems();
+  const cat = L.cats.find(c => c.id === S.cat);
+  $('catNote').textContent = S.q ? `نتائج «${S.q}» في ${L.title} — ${items.length}` : cat.note;
+  if (!items.length){ $('grid').innerHTML = '<p class="empty">لا نتائج مطابقة.</p>'; return; }
+  $('grid').innerHTML = items.map(i =>
+    `<button class="card ${L.id==='gpt'?'gpt':''}" data-code="${i.code}" aria-pressed="${S.picked && S.picked.code===i.code}">
+       ${i.star ? '<span class="star" title="النواة اليومية">★</span>' : ''}
+       <span class="code">/${i.code}</span>
+       <span class="t">${esc(i.t)}</span>
+       <span class="d">${esc(i.d)}</span>
+     </button>`).join('');
+  $('grid').querySelectorAll('.card').forEach(b => b.onclick = () => pick(L.id, b.dataset.code));
+}
+
+/* ═══════════ المركّب ═══════════ */
+function fill(sel, list){
+  sel.innerHTML = '<option value="">بدون</option>' + list.map(v => `<option value="${v}">${v}</option>`).join('');
+}
+function renderFields(){
+  const f = lib().fields;
+  fill($('fStyle'), f.style); fill($('fRatio'), f.ratio);
+  fill($('fLang'), f.language); fill($('fTone'), f.tone);
+  if (f.text){ $('textField').style.display = ''; fill($('fText'), f.text); }
+  else { $('textField').style.display = 'none'; $('fText').innerHTML = '<option value=""></option>'; }
+  $('composer').classList.toggle('gpt', lib().id === 'gpt');
+}
+function pick(libId, code, opts){
+  if (libId !== S.lib){ S.lib = libId; S.cat = LIBS.find(l=>l.id===libId).cats[0].id; renderLibs(); renderCats(); renderFields(); }
+  const hit = findItem(libId, code); if (!hit) return;
+  S.picked = hit.item;
+  $('cCode').textContent = '/' + hit.item.code;
+  $('cTitle').textContent = hit.item.t;
+  $('cDesc').textContent = hit.item.d;
+  $('fTopic').value = (opts && opts.topic) || hit.item.ex;
+  const set = (opts && opts.set) || {};
+  $('fStyle').value = set.style || ''; $('fRatio').value = set.ratio || '';
+  $('fLang').value = set.language || ''; $('fTone').value = set.tone || '';
+  if (lib().fields.text) $('fText').value = set.text || '';
+  build(); renderGrid(); go('library');
+  $('fTopic').focus({preventScroll:true});
+}
+function build(){
+  if (!S.picked){ $('out').textContent = '/—'; $('outLen').textContent = ''; return; }
+  const topic = $('fTopic').value.trim() || S.picked.ex;
+  const mods = [];
+  const s = $('fStyle').value, r = $('fRatio').value, l = $('fLang').value, t = $('fTone').value;
+  if (s) mods.push('style: ' + s);
+  if (r) mods.push('ratio: ' + r);
+  if (l) mods.push('language: ' + l);
+  if (t) mods.push('tone: ' + t);
+  if (lib().fields.text && $('fText').value) mods.push('text: ' + $('fText').value);
+
+  let out = '/' + S.picked.code + ' ' + topic;
+  if (mods.length) out += '، ' + mods.join(', ');
+
+  const layer = [];
+  const ty = $('fType').value;
+  if (ty){
+    layer.push('TYPE: ' + TYPE_LAYER[ty].label + ' — ' + TYPE_LAYER[ty].feel);
+    layer.push('palette: ' + TYPE_LAYER[ty].hex);
+    layer.push(L_DISC);
+  }
+  if ($('oSig').checked) layer.push(L_SIG);
+  if ($('oForbid').checked) layer.push(L_FORBID);
+  if ($('oFlag').checked) layer.push(L_FLAG);
+  if (layer.length) out += '\n\n— Khaldoun identity layer —\n' + layer.join('\n');
+
+  $('out').textContent = out;
+  $('outLen').textContent = out.length + ' chars';
+  return out;
+}
+
+/* ═══════════ القائمة ═══════════ */
+function saveQueue(){ try{ localStorage.setItem('kaa-shorthand-queue', JSON.stringify(S.queue)); }catch(e){} }
+function loadQueue(){ try{ const v = localStorage.getItem('kaa-shorthand-queue'); if (v) S.queue = JSON.parse(v) || []; }catch(e){ S.queue = []; } }
+function renderQueue(){
+  const el = $('queue');
+  if (!S.queue.length){ el.innerHTML = '<p class="empty">القائمة فارغة. اختر اختصاراً واضغط «أضف للقائمة».</p>'; }
+  else {
+    el.innerHTML = S.queue.map((cmd,i) =>
+      `<div class="qrow"><span class="i">${i+1}</span><pre>${esc(cmd)}</pre><button class="x" data-i="${i}" aria-label="حذف السطر ${i+1}">✕</button></div>`).join('');
+    el.querySelectorAll('.x').forEach(b => b.onclick = () => {
+      S.queue.splice(+b.dataset.i, 1); saveQueue(); renderQueue(); renderNav();
+    });
+  }
+  const qc = $('qc'); if (qc) qc.textContent = S.queue.length ? '(' + S.queue.length + ')' : '';
+}
+
+/* ═══════════ الأقسام الثابتة ═══════════ */
+function renderLayers(){
+  $('layers').innerHTML = LAYERS.map(L => {
+    const chips = L.codes.map(c => `<button class="chip" data-lib="${L.lib}" data-code="${c}">/${c}</button>`).join('');
+    return `<div class="panel"><h3>${L.h}</h3><div class="sub">${L.s}</div><p>${L.p}</p><div class="chips">${chips}</div></div>`;
+  }).join('');
+  $('layers').querySelectorAll('.chip').forEach(b => b.onclick = () => pick(b.dataset.lib, b.dataset.code));
+  $('defaults').innerHTML = DEFAULTS.map(d => `<li>${esc(d)}</li>`).join('');
+}
+function renderTemplates(){
+  $('templates').innerHTML = TEMPLATES.map((t,i) => {
+    const mods = Object.entries(t.set).map(([k,v]) => k + ': ' + v).join(', ');
+    return `<button class="tpl" data-i="${i}"><b>${t.h}</b><code>/${t.code} ${t.topic}، ${mods}</code></button>`;
+  }).join('');
+  $('templates').querySelectorAll('.tpl').forEach(b => b.onclick = () => {
+    const t = TEMPLATES[+b.dataset.i]; pick(t.lib, t.code, {topic:t.topic, set:t.set});
+  });
+}
+function renderIdentity(){
+  $('palettes').innerHTML = PALETTES.map(p =>
+    `<div class="panel"><h3>${p.h}</h3><div class="sub">${p.s}</div><p>${p.p}</p>
+      <div class="swatches ${p.forbidden?'forbidden':''}">${p.c.map(([n,h]) =>
+        `<button class="sw" data-hex="${h}"><span class="chipc" style="background:${h}"></span>
+           <span class="m"><span class="n">${n}</span><span class="h">${h}</span></span></button>`).join('')}
+      </div></div>`).join('');
+  $('palettes').querySelectorAll('.sw').forEach(b => b.onclick = () => copy(b.dataset.hex, 'نُسخ ' + b.dataset.hex));
+  $('camera').innerHTML = CAMERA.map(([h,d]) => `<li><b>${h}.</b> ${d}</li>`).join('');
+  $('lighting').innerHTML = LIGHTING.map(x => `<li>${esc(x)}</li>`).join('');
+  $('sigrules').innerHTML = SIGRULES.map(x => `<li>${esc(x)}</li>`).join('');
+  $('tones').innerHTML = TONES.map(x => `<li>${esc(x)}</li>`).join('');
+}
+
+/* ═══════════ أدوات ═══════════ */
+let toastT;
+function toast(msg){
+  const t = $('toast'); t.textContent = msg; t.classList.add('on');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('on'), 1800);
+}
+function copy(text, msg){
+  const done = () => toast(msg || 'تم النسخ');
+  if (navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done).catch(() => fallbackCopy(text, done));
+  } else fallbackCopy(text, done);
+}
+function fallbackCopy(text, done){
+  const ta = document.createElement('textarea');
+  ta.value = text; ta.setAttribute('readonly',''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+  document.body.appendChild(ta); ta.select();
+  try{ document.execCommand('copy'); done(); }catch(e){ toast('تعذّر النسخ — حدّد النص يدوياً'); }
+  document.body.removeChild(ta);
+}
+
+/* ═══════════ الأحداث ═══════════ */
+['fTopic','fStyle','fRatio','fLang','fTone','fText','fType','oSig','oForbid','oFlag'].forEach(id => {
+  const el = $(id); if (!el) return;
+  el.addEventListener('input', build); el.addEventListener('change', build);
+});
+$('q').addEventListener('input', e => { S.q = e.target.value.trim(); renderGrid(); });
+$('starOnly').onclick = () => {
+  S.starOnly = !S.starOnly;
+  $('starOnly').setAttribute('aria-pressed', S.starOnly); renderGrid();
+};
+$('copy').onclick = () => {
+  if (!S.picked) return toast('اختر اختصاراً أولاً');
+  copy(build(), 'نُسخ الأمر');
+  const b = $('copy'); b.textContent = 'تم النسخ ✓'; b.classList.add('done');
+  setTimeout(() => { b.textContent = 'نسخ الأمر'; b.classList.remove('done'); }, 1600);
+};
+$('enqueue').onclick = () => {
+  if (!S.picked) return toast('اختر اختصاراً أولاً');
+  S.queue.push(build()); saveQueue(); renderQueue(); renderNav();
+  toast('أُضيف — ' + S.queue.length + ' في القائمة');
+};
+$('copyAll').onclick = () => {
+  if (!S.queue.length) return toast('القائمة فارغة');
+  copy(S.queue.join('\n\n———\n\n'), 'نُسخت القائمة كاملة');
+};
+$('dlAll').onclick = async () => {
+  if (!S.queue.length) return toast('القائمة فارغة');
+  const text = S.queue.join('\n\n———\n\n');
+  const name = 'khaldoun-shorthand-queue.txt';
+  /* داخل عارض الآرتفاكت: الحفظ يمرّ بموافقة المشاهد. محلياً: تنزيل مباشر. */
+  const api = (window.claude && claude.use) ? await claude.use('downloads') : null;
+  if (api){
+    try{ await api.save({filename:name, data:text}); toast('حُفظ الملف'); }
+    catch(err){ toast(err && err.code === 'declined' ? 'أُلغي الحفظ' : 'تعذّر الحفظ — انسخ القائمة بدلاً منه'); }
+    return;
+  }
+  const blob = new Blob([text], {type:'text/plain;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob); a.download = name;
+  document.body.appendChild(a); a.click(); document.body.removeChild(a);
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+};
+$('clearAll').onclick = () => {
+  if (!S.queue.length) return;
+  S.queue = []; saveQueue(); renderQueue(); renderNav(); toast('فُرّغت القائمة');
+};
+document.addEventListener('keydown', e => {
+  if (e.key === '/' && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA'){
+    e.preventDefault(); go('library'); $('q').focus();
+  }
+});
+
+/* ═══════════ الإقلاع ═══════════ */
+loadQueue();
+renderNav(); renderLibs(); renderCats(); renderFields(); renderGrid();
+renderLayers(); renderTemplates(); renderIdentity(); renderQueue();
+pick('kaa', 'syriadocposter');
+</script>
